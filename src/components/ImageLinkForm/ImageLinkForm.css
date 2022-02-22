@@ -10,8 +10,8 @@ input[type="text"]{
 button{
     border-radius: 5px;
     border-color: rgb(141, 136, 130);
-    padding-bottom: 1px;
     box-shadow: 2px;
+    align-items: center;
 }
 
 .form{
