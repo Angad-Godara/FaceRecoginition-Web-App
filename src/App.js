@@ -6,9 +6,10 @@ import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
+import SignIn from './components/SignIn/SignIn';
+import Register from './components/Register/Register';
 import './App.css';
 
-//You must add your own API key here from Clarifai.
 const app = new Clarifai.App({
  apiKey: '96f590ed948648ea937b13471d0b4898'
 });
@@ -20,23 +21,11 @@ class App extends Component {
       input: '',
       imageUrl: '',
       box: {},
+      route: 'signin',
+      IsSignedIn: false,
     }
   }
   
-  calculateface = (data) => {
-    const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
-    const image = document.getElementById('inputimage');
-    const width = image.width;
-    const height = image.height;
-    // console.log(width, height);
-    return({
-      leftCol: clarifaiFace.left_col * width,
-      topRow: clarifaiFace.top_row * height,
-      rightCol: width - (clarifaiFace.right_col * width),
-      bottomRow: height - (clarifaiFace.bottom_row * height)
-    });
-  }
-
   DisplayBox = (boxs) => {
     this.setState({box: boxs});
   }
@@ -44,21 +33,45 @@ class App extends Component {
   onInputChange = (event) => {
     this.setState({input: event.target.value});
   }
-
+  
   onButtonSubmit = () => {
     this.setState({imageUrl: this.state.input});
     app.models
-      .predict(
-        Clarifai.FACE_DETECT_MODEL,
-        this.state.input)
+    .predict(
+      Clarifai.FACE_DETECT_MODEL,
+      this.state.input)
       .then(response => this.DisplayBox(this.calculateface(response))
-        .catch(err => console.log(err)))
-  }
+      .catch(err => console.log(err)))
+    }
 
-  render() {
+    calculateface = (data) => {
+      const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
+      const image = document.getElementById('inputimage');
+      const width = image.width;
+      const height = image.height;
+      return({
+        leftCol: clarifaiFace.left_col * width,
+        topRow: clarifaiFace.top_row * height,
+        rightCol: width - (clarifaiFace.right_col * width),
+        bottomRow: height - (clarifaiFace.bottom_row * height)
+      });
+    }
+  
+
+    OnRouteChange = (rout) => {
+      if(rout === 'signout'){
+        this.setState({IsSignedIn: false})
+      } else if(rout === 'home'){
+        this.setState({IsSignedIn: true})
+      }
+      this.setState({route: rout})
+    }
+    
+    render() {
+    const {IsSignedIn, imageUrl, box} = this.state;
     return (
       <div className="App">
-
+      
       <Particles
                 id="tsparticles"
                 options={{
@@ -116,14 +129,25 @@ class App extends Component {
                 }}
               />  
 
-        <Navigation />
-              <Logo />
-              <Rank />
-              <ImageLinkForm
-                onInputChange={this.onInputChange}
-                onButtonSubmit={this.onButtonSubmit}
-              />
-              <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl} />
+        <Navigation IsSignedIn={IsSignedIn} OnRouteChange = {this.OnRouteChange}/>
+        { (this.state.route === 'home')
+          ?
+                <div>
+                  <Logo />
+                  <Rank />
+                  <ImageLinkForm
+                    onInputChange={this.onInputChange}
+                    onButtonSubmit={this.onButtonSubmit}
+                  />
+                  <FaceRecognition box={box} imageUrl={imageUrl} />
+              </div>
+            :
+              (
+                this.state.route === 'register'
+                ? <Register OnRouteChange={this.OnRouteChange}/>
+                : <SignIn OnRouteChange = {this.OnRouteChange}/>
+              )
+        } 
       </div>
     );
   }
