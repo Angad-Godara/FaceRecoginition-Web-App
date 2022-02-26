@@ -3,10 +3,13 @@ body {
   font-family: 'Courier New', Courier, monospace, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-    font-weight: 600;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-weight: 500;
   background: linear-gradient(to right, rgb(189, 100, 221), rgb(0, 225, 255));
+  /* background: url(https://cdn.dribbble.com/users/130187/screenshots/7297545/media/ad6af0e186ad49411986319a2726886a.jpg?compress=1&resize=400x300&vertical=top); */
+  /* background-repeat: no-repeat; */
+  /* background-size:cover; */
   margin: 0;
   padding: 0;
 }

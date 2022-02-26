@@ -19,9 +19,27 @@ class App extends Component {
     this.state = {
       input: '',
       imageUrl: '',
+      box: {},
     }
   }
   
+  calculateface = (data) => {
+    const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
+    const image = document.getElementById('inputimage');
+    const width = image.width;
+    const height = image.height;
+    // console.log(width, height);
+    return({
+      leftCol: clarifaiFace.left_col * width,
+      topRow: clarifaiFace.top_row * height,
+      rightCol: width - (clarifaiFace.right_col * width),
+      bottomRow: height - (clarifaiFace.bottom_row * height)
+    });
+  }
+
+  DisplayBox = (boxs) => {
+    this.setState({box: boxs});
+  }
 
   onInputChange = (event) => {
     this.setState({input: event.target.value});
@@ -33,14 +51,9 @@ class App extends Component {
       .predict(
         Clarifai.FACE_DETECT_MODEL,
         this.state.input)
-      .then(
-        function(response){
-          console.log(response);
-        },
-        function(err){
-
-        })
-  } 
+      .then(response => this.DisplayBox(this.calculateface(response))
+        .catch(err => console.log(err)))
+  }
 
   render() {
     return (
@@ -86,7 +99,7 @@ class App extends Component {
                         enable: true,
                         area: 800,
                       },
-                      value: 40,
+                      value: 35,
                     },
                     opacity: {
                       value: 0.5,
@@ -110,7 +123,7 @@ class App extends Component {
                 onInputChange={this.onInputChange}
                 onButtonSubmit={this.onButtonSubmit}
               />
-              <FaceRecognition imageUrl={this.state.imageUrl} />
+              <FaceRecognition box={this.state.box} imageUrl={this.state.imageUrl} />
       </div>
     );
   }
