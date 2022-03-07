@@ -23,7 +23,26 @@ class App extends Component {
       box: {},
       route: 'signin',
       IsSignedIn: false,
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        enteries: 0,
+        joined: ''
+      }
     }
+  }
+
+  loadUser = (data) => {
+    this.setState({
+      user :{
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        enteries: data.enteries,
+        joined: data.joined
+      }
+    })
   }
   
   DisplayBox = (boxs) => {
@@ -40,9 +59,33 @@ class App extends Component {
     .predict(
       Clarifai.FACE_DETECT_MODEL,
       this.state.input)
-      .then(response => this.DisplayBox(this.calculateface(response))
-      .catch(err => console.log(err)))
-    }
+      .then(response => 
+        {
+          
+          if(response){
+            fetch('http://localhost:3000/image', {
+              method: 'put',
+              headers: {'Content-type' : 'application/json'},
+              body: JSON.stringify({
+                id: this.state.user.id,
+              })
+            })
+            .then(res => res.json())
+            .then(count => {
+              // this.setState({user : {
+              //   enteries : count
+              // }})
+              // we can't use the above code because it resets the whole users state ans put only enteries property in it
+              // that's why we used object assign to only modify the required things
+              this.setState(Object.assign(this.state.user, {enteries: count}))
+            })
+          }
+
+
+          this.DisplayBox(this.calculateface(response))
+          .catch(err => console.log(err))
+        })
+      }
 
     calculateface = (data) => {
       const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
@@ -68,7 +111,7 @@ class App extends Component {
     }
     
     render() {
-    const {IsSignedIn, imageUrl, box} = this.state;
+    const {IsSignedIn, imageUrl, box, user} = this.state;
     return (
       <div className="App">
       
@@ -134,7 +177,10 @@ class App extends Component {
           ?
                 <div>
                   <Logo />
-                  <Rank />
+                  <Rank 
+                    name = {user.name}
+                    enteries = {user.enteries}
+                  />
                   <ImageLinkForm
                     onInputChange={this.onInputChange}
                     onButtonSubmit={this.onButtonSubmit}
@@ -144,8 +190,8 @@ class App extends Component {
             :
               (
                 this.state.route === 'register'
-                ? <Register OnRouteChange={this.OnRouteChange}/>
-                : <SignIn OnRouteChange = {this.OnRouteChange}/>
+                ? <Register loadUser={this.loadUser} OnRouteChange={this.OnRouteChange}/>
+                : <SignIn loadUser={this.loadUser} OnRouteChange = {this.OnRouteChange}/>
               )
         } 
       </div>
