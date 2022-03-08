@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Particles from "react-tsparticles";
-import Clarifai from 'clarifai';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Navigation from './components/Navigation/Navigation';
 import Logo from './components/Logo/Logo';
@@ -9,10 +8,6 @@ import Rank from './components/Rank/Rank';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
 import './App.css';
-
-const app = new Clarifai.App({
-  apiKey: '96f590ed948648ea937b13471d0b4898'
-});
 
 const initialState = {
   input: '',
@@ -57,31 +52,33 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    app.models
-      .predict(
-        Clarifai.FACE_DETECT_MODEL,
-        this.state.input)
+    fetch('https://mighty-ocean-50915.herokuapp.com/imageUrl', {
+      method: 'post',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify({
+        url: this.state.input,
+      })
+    })
+      .then(response => response.json())
       .then(response => {
-
         if (response) {
-          fetch('http://localhost:3000/image', {
+          fetch('https://mighty-ocean-50915.herokuapp.com/image', {
             method: 'put',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
               id: this.state.user.id,
             })
           })
-            .then(res => res.json())
+            .then(response => response.json())
             .then(count => {
               this.setState(Object.assign(this.state.user, { enteries: count }))
             })
-            .catch(console.log)
+            .catch(err => console.log(err))
         }
 
-
         this.DisplayBox(this.calculateface(response))
-          .catch(err => console.log(err))
       })
+      .catch(err => console.log(err))
   }
 
   calculateface = (data) => {
@@ -110,7 +107,7 @@ class App extends Component {
   render() {
     const { IsSignedIn, imageUrl, box, user } = this.state;
     return (
-      <div className="App">
+      <div className="App" >
 
         <Particles
           id="tsparticles"
