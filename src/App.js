@@ -51,6 +51,7 @@ class App extends Component {
   }
 
   onButtonSubmit = () => {
+    this.setState({ box: {} })
     this.setState({ imageUrl: this.state.input });
     fetch('https://mighty-ocean-50915.herokuapp.com/imageUrl', {
       method: 'post',
@@ -61,7 +62,7 @@ class App extends Component {
     })
       .then(response => response.json())
       .then(response => {
-        if (response) {
+        if (response && response.outputs[0].data.regions) {
           fetch('https://mighty-ocean-50915.herokuapp.com/image', {
             method: 'put',
             headers: { 'Content-type': 'application/json' },
@@ -73,12 +74,11 @@ class App extends Component {
             .then(count => {
               this.setState(Object.assign(this.state.user, { enteries: count }))
             })
-            .catch(err => console.log(err))
+            .catch(console.log)
+          this.DisplayBox(this.calculateface(response))
         }
-
-        this.DisplayBox(this.calculateface(response))
       })
-      .catch(err => console.log(err))
+      .catch(console.log)
   }
 
   calculateface = (data) => {
