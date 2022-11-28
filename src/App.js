@@ -13,7 +13,7 @@ const initialState = {
   input: '',
   imageUrl: '',
   box: {},
-  route: 'signin',
+  route: 'home',
   IsSignedIn: false,
   user: {
     id: '',
@@ -166,10 +166,10 @@ class App extends Component {
           }}
         />
 
-        <Navigation IsSignedIn={IsSignedIn} OnRouteChange={this.OnRouteChange} />
+        {/* <Navigation IsSignedIn={IsSignedIn} OnRouteChange={this.OnRouteChange} /> */}
         {(this.state.route === 'home')
           ?
-          <div>
+          <div style={{ marginTop: '13vh' }}>
             <Logo />
             <Rank
               name={user.name}
