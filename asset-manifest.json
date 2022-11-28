@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/FaceRecoginition-Web-App/static/css/main.4f47deee.chunk.css",
-    "main.js": "/FaceRecoginition-Web-App/static/js/main.832e5815.chunk.js",
-    "main.js.map": "/FaceRecoginition-Web-App/static/js/main.832e5815.chunk.js.map",
-    "runtime-main.js": "/FaceRecoginition-Web-App/static/js/runtime-main.8b040990.js",
-    "runtime-main.js.map": "/FaceRecoginition-Web-App/static/js/runtime-main.8b040990.js.map",
-    "static/css/2.6d7c7915.chunk.css": "/FaceRecoginition-Web-App/static/css/2.6d7c7915.chunk.css",
-    "static/js/2.71b869b5.chunk.js": "/FaceRecoginition-Web-App/static/js/2.71b869b5.chunk.js",
-    "static/js/2.71b869b5.chunk.js.map": "/FaceRecoginition-Web-App/static/js/2.71b869b5.chunk.js.map",
-    "static/js/3.fa1a6a69.chunk.js": "/FaceRecoginition-Web-App/static/js/3.fa1a6a69.chunk.js",
-    "static/js/3.fa1a6a69.chunk.js.map": "/FaceRecoginition-Web-App/static/js/3.fa1a6a69.chunk.js.map",
+    "main.css": "/FaceRecoginition-Web-App/static/css/main.28702f38.chunk.css",
+    "main.js": "/FaceRecoginition-Web-App/static/js/main.903cb2e3.chunk.js",
+    "main.js.map": "/FaceRecoginition-Web-App/static/js/main.903cb2e3.chunk.js.map",
+    "runtime-main.js": "/FaceRecoginition-Web-App/static/js/runtime-main.db620ad8.js",
+    "runtime-main.js.map": "/FaceRecoginition-Web-App/static/js/runtime-main.db620ad8.js.map",
+    "static/css/2.75261d94.chunk.css": "/FaceRecoginition-Web-App/static/css/2.75261d94.chunk.css",
+    "static/js/2.8781a8a5.chunk.js": "/FaceRecoginition-Web-App/static/js/2.8781a8a5.chunk.js",
+    "static/js/2.8781a8a5.chunk.js.map": "/FaceRecoginition-Web-App/static/js/2.8781a8a5.chunk.js.map",
+    "static/js/3.c4fb8130.chunk.js": "/FaceRecoginition-Web-App/static/js/3.c4fb8130.chunk.js",
+    "static/js/3.c4fb8130.chunk.js.map": "/FaceRecoginition-Web-App/static/js/3.c4fb8130.chunk.js.map",
     "index.html": "/FaceRecoginition-Web-App/index.html",
-    "static/css/2.6d7c7915.chunk.css.map": "/FaceRecoginition-Web-App/static/css/2.6d7c7915.chunk.css.map",
-    "static/css/main.4f47deee.chunk.css.map": "/FaceRecoginition-Web-App/static/css/main.4f47deee.chunk.css.map",
-    "static/js/2.71b869b5.chunk.js.LICENSE.txt": "/FaceRecoginition-Web-App/static/js/2.71b869b5.chunk.js.LICENSE.txt",
+    "static/css/2.75261d94.chunk.css.map": "/FaceRecoginition-Web-App/static/css/2.75261d94.chunk.css.map",
+    "static/css/main.28702f38.chunk.css.map": "/FaceRecoginition-Web-App/static/css/main.28702f38.chunk.css.map",
+    "static/js/2.8781a8a5.chunk.js.LICENSE.txt": "/FaceRecoginition-Web-App/static/js/2.8781a8a5.chunk.js.LICENSE.txt",
     "static/media/brain.eea55d5b.jpg": "/FaceRecoginition-Web-App/static/media/brain.eea55d5b.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.8b040990.js",
-    "static/css/2.6d7c7915.chunk.css",
-    "static/js/2.71b869b5.chunk.js",
-    "static/css/main.4f47deee.chunk.css",
-    "static/js/main.832e5815.chunk.js"
+    "static/js/runtime-main.db620ad8.js",
+    "static/css/2.75261d94.chunk.css",
+    "static/js/2.8781a8a5.chunk.js",
+    "static/css/main.28702f38.chunk.css",
+    "static/js/main.903cb2e3.chunk.js"
   ]
 }
