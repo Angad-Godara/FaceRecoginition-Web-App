@@ -4,7 +4,7 @@ The FaceRecognition-Web-App is built in `React` and is an awesome utility to det
 You can visit the application [here](http://facereco-smart-brain.herokuapp.com/)
 <hr>
 
-###Note: Login/SignUp functionality is currently disabled due to heroku's new policy.
+### Note: Login/SignUp functionality is currently disabled due to heroku's new policy.
 
 ### Login Page
 On visiting, the first interface which you will get is shown below:
